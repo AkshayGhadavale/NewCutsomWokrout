@@ -1,5 +1,5 @@
 let timearray = [
-  ["Konaaasan 1", 2, 0, "./images/konaaasan 1.gif"],
+  ["cobera", 2, 0, "/images/coach-coach-josh-wood.gif"],
   ["pushups", 4, 0, "./images/pushup.gif"],
   ["Crunches", 0, 10, "./images/abdominal-supra-abdominal.gif"],
   ["Boxing", 0, 10, "./images/pov-boxing.gif"],
