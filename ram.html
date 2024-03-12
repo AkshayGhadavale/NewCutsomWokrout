@@ -1,53 +1,53 @@
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gym Workout App</title>
-  <style>
-    /* Your CSS styles here */
-    .workout-app {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-
-    .workout-app h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-      color: #333;
-    }
-
-    .workout-app .app-name {
-      font-size: 60px;
-      font-weight: bold;
-      color: #ff5733;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upload Image and Save URL in Array</title>
 </head>
 <body>
+  <input type="file" id="imageUpload" accept="image/*">
+  <div id="imagePreview"></div>
 
+  <script>
+    // Function to handle image upload
+    function handleImageUpload() {
+      const fileInput = document.getElementById('imageUpload');
+      const imagePreview = document.getElementById('imagePreview');
 
-<div>
-  <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: none;">
-  <label for="file" style="cursor: pointer;">Upload Image</label>
-  <img id="output" width="200" />
-</div>
+      fileInput.addEventListener('change', function() {
+        const file = this.files[0];
+        console.log(file)
 
-<script>
-  var loadFile = function(event) {
-      var image = document.getElementById('output');
-      image.src = URL.createObjectURL(event.target.files[0]);
-      console.log(URL.createObjectURL(event.target.files[0]));
-  };
-</script>
+        if (file) {
+          const reader = new FileReader();
+          
+
+          reader.addEventListener('load', function() {
+            const imageUrl = this.result;
+            // Display the image preview
+            // imagePreview.innerHTML = `<img src="${imageUrl}" alt="Uploaded Image" style="max-width: 200px;">`;
+
+            // Save the URL into an array
+            saveImageUrl(imageUrl);
+            console.log(`path${imageUrl}`)
+          });
+
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Function to save image URL into an array
+    const imageUrls = [];
+
+    function saveImageUrl(url) {
+      imageUrls.push(url);
+      console.log("Image URLs Array:", imageUrls);
+    }
+
+    // Initialize image upload handler
+    handleImageUpload();
+  </script>
 </body>
 </html>

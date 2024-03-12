@@ -99,6 +99,10 @@ function showeex() {
     item.draggable = true;
     item.setAttribute("data-index", i);
 
+    let img = document.createElement("img");
+    img.src = timearray[i][3];
+    img.className='imgsec';
+
     let name = document.createElement("input");
     name.type = "text";
     name.className = "exitemname";
@@ -123,6 +127,7 @@ function showeex() {
 
     timex.appendChild(minnum);
     timex.appendChild(secnum);
+    // item.appendChild(img)
     item.appendChild(name);
     item.appendChild(timex);
 
@@ -438,21 +443,32 @@ function addex() {
   let exname = document.getElementById("nameex").value;
   let minex = document.getElementById("minex").value;
   let secex = document.getElementById("secex").value;
-  let imagelink = document.getElementById("imagelink").value;
+  let fileInput = document.getElementById("imagelink");
 
-  if (exname == "" && minex == "" && secex == "" && imagelink == "") {
-    alert("somethings missing");
+  if (exname === "" || minex === "" || secex === "") {
+      alert("Something is missing");
+  } else if (fileInput.files.length === 0) {
+      alert("Please select an image file");
   } else {
-    console.log(exname, minex, secex, imagelink);
-    timearray.push([exname, Number(minex), Number(secex), imagelink]);
-    console.log(timearray);
+      let imgFile = fileInput.files[0];
+      let imgReader = new FileReader();
 
-    // Remove all child elements from the "list" element
-    let listElement = document.getElementById("list");
-    while (listElement.firstChild) {
-      listElement.removeChild(listElement.firstChild);
-    }
+      imgReader.onload = function(event) {
+          let imgDataUrl = event.target.result;
+          mainworkoutarr.push([exname, Number(minex), Number(secex), imgDataUrl]);
+          console.log(mainworkoutarr);
+
+          // Remove all child elements from the "list" element
+          let listElement = document.getElementById("list");
+          while (listElement.firstChild) {
+              listElement.removeChild(listElement.firstChild);
+          }
+
+          // Reshow the list
+          showeex();
+          showmaimarr();
+      };
+
+      imgReader.readAsDataURL(imgFile);
   }
-  // reshow  the list
-  showeex();
 }

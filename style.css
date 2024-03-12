@@ -30,6 +30,10 @@ body {
     gap: 20px;
   }
 
+  #username{
+    display: none;
+  }
+
   .button-9 {
     margin: 20px;
     appearance: button;
